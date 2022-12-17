@@ -13,5 +13,3 @@
 -- INNER JOIN stocks ON assets.id = stocks.asset_id
 -- WHERE asset_types.name = 'stock';
 -- It seems that this script is not working as intended
-
--- query to get current portfolio

@@ -40,20 +40,15 @@
 --   (6, 1, 3, 'sell', '2019-01-31', 4, 133.08, 'Johnson & Johnson rebalance');
 
 -- portfolio_assets (created from portfolio_transactions)
-INSERT INTO portfolio_assets (portfolio_id, asset_id, last_modified, asset_quantity)
-SELECT portfolio_id, asset_id, date,
-  (SELECT SUM(CASE WHEN type = 'buy' THEN quantity ELSE -quantity END)
-   FROM portfolio_transactions
-   WHERE asset_id = t.asset_id AND date <= t.date) AS quantity
-FROM portfolio_transactions t
-WHERE NOT EXISTS (
-  SELECT 1 FROM portfolio_assets
-  WHERE portfolio_assets.portfolio_id = t.portfolio_id
-    AND portfolio_assets.asset_id = t.asset_id
-);
-
+-- INSERT INTO portfolio_assets (portfolio_id, asset_id, last_modified, asset_quantity)
 -- SELECT portfolio_id, asset_id, date,
 --   (SELECT SUM(CASE WHEN type = 'buy' THEN quantity ELSE -quantity END)
 --    FROM portfolio_transactions
 --    WHERE asset_id = t.asset_id AND date <= t.date) AS quantity
 -- FROM portfolio_transactions t
+-- WHERE NOT EXISTS (
+--   SELECT 1 FROM portfolio_assets
+--   WHERE portfolio_assets.portfolio_id = t.portfolio_id
+--     AND portfolio_assets.asset_id = t.asset_id
+-- );
+
