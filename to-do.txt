@@ -1,4 +1,5 @@
-Create a python script to update stock_history
-Update the schema and delete the create-tables sql script
+Create a python script to update stock_history: ok
+Update the schema: ok
 Organize the git repo
 Create documentation with how to create the db
+usar de exemplo ativos da bolsa brasileira
