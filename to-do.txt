@@ -1,5 +1,5 @@
 Create a python script to update stock_history: ok
 Update the schema: ok
-Organize the git repo
+Organize the git repo: ok
 Create documentation with how to create the db
 usar de exemplo ativos da bolsa brasileira
