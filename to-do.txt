@@ -3,3 +3,4 @@ Update the schema: ok
 Organize the git repo: ok
 Create documentation with how to create the db
 usar de exemplo ativos da bolsa brasileira
+stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id
