@@ -36,14 +36,15 @@ exchange
 sector
 type
 industry 
-    Table: stock_history 
-stock_id (foreign key to stocks.asset_id) 
-date (date the historical data was recorded) 
-open 
-high 
-low 
-close 
-adjusted_close 
+    Table: stock_history
+id (primary key)
+asset_id (foreign key to assets.id)
+date (date the historical data was recorded)
+open
+high
+low
+close
+adjusted_close
 volume
     Table: bonds
 asset_id (primary key, foreign key to assets.id)
@@ -52,13 +53,14 @@ type
 rating
 coupon_type
     Table: bond_history
-bond_id (foreign key to bonds.asset_id)
+id (primary key)
+asset_id (foreign key to assets.id)
 date (date the historical data was recorded)
 coupon
 maturity
 yield
 spread
-credit_rating 
+credit_rating
     Table: portfolio_transactions
 id (primary key)
 portfolio_id (foreign key to portfolios.id)
