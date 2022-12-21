@@ -38,7 +38,8 @@ CREATE TABLE stocks (
 );
 
 CREATE TABLE stock_history (
-  stock_id INTEGER NOT NULL,
+  id INTEGER PRIMARY KEY,
+  asset_id INTEGER NOT NULL,
   date DATE NOT NULL,
   open REAL NOT NULL,
   high REAL NOT NULL,
@@ -46,8 +47,7 @@ CREATE TABLE stock_history (
   close REAL NOT NULL,
   adjusted_close REAL NOT NULL,
   volume INTEGER NOT NULL,
-  PRIMARY KEY (stock_id, date),
-  FOREIGN KEY (stock_id) REFERENCES stocks(asset_id)
+  FOREIGN KEY (asset_id) REFERENCES assets(id)
 );
 
 CREATE TABLE bonds (
@@ -60,15 +60,15 @@ CREATE TABLE bonds (
 );
 
 CREATE TABLE bond_history (
-  bond_id INTEGER NOT NULL,
+  id INTEGER PRIMARY KEY,
+  asset_id INTEGER NOT NULL,
   date DATE NOT NULL,
   coupon REAL NOT NULL,
   maturity DATE NOT NULL,
   yield REAL NOT NULL,
   spread REAL NOT NULL,
-  credit_rating TEXT NOT NULL,
-  PRIMARY KEY (bond_id, date),
-  FOREIGN KEY (bond_id) REFERENCES bonds(asset_id)
+  credit_rating INTEGER NOT NULL,
+  FOREIGN KEY (asset_id) REFERENCES assets(id)
 );
 
 CREATE TABLE portfolio_transactions (
