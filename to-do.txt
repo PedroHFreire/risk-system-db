@@ -1,6 +1,8 @@
-Create a python script to update stock_history: ok
-Update the schema: ok
-Organize the git repo: ok
-Create documentation with how to create the db
-usar de exemplo ativos da bolsa brasileira
-stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id
+stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id 
+PK de stock_history deveria ser asset_id + date, pois assim não teria duas linhas pro mesmo ativo no mesmo dia, mesma coisa vale para bond_history 
+usar de exemplo ativos da bolsa brasileira 
+Create a python script to update stock_history: ok 
+Update the schema: ok 
+Organize the git repo: ok 
+Create documentation with how to create the db 
+
