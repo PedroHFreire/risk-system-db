@@ -31,7 +31,7 @@ def update_stock_history(start_date, end_date):
             volume = row['Volume']
 
             # Insert the stock data into the stock_history table
-            cursor.execute('INSERT INTO stock_history (stock_id, date, open, high, low, close, adjusted_close, volume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (asset_id, date, open_price, high, low, close, adjusted_close, volume))
+            cursor.execute('INSERT INTO stock_history (asset_id, date, open, high, low, close, adjusted_close, volume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (asset_id, date, open_price, high, low, close, adjusted_close, volume))
 
     # Commit the changes to the database
     conn.commit()
