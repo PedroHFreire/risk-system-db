@@ -22,10 +22,11 @@ CREATE TABLE portfolio_assets (
   portfolio_id INTEGER NOT NULL,
   asset_id INTEGER NOT NULL,
   asset_quantity INTEGER NOT NULL,
-  date_added DATE NOT NULL,
+  last_modified DATE NOT NULL,
   FOREIGN KEY (portfolio_id) REFERENCES portfolios(id),
   FOREIGN KEY (asset_id) REFERENCES assets(id)
 );
+
 
 CREATE TABLE stocks (
   asset_id INTEGER PRIMARY KEY,
