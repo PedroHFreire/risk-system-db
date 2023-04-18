@@ -2,6 +2,7 @@ import unittest
 import sqlite3
 import os
 import sys
+import datetime as dt
 sys.path.append(os.path.join(os.path.dirname(__file__), 'scripts', 'etl'))
 import stock_history
 
@@ -32,7 +33,15 @@ class TestPortfolioManagementDatabase(unittest.TestCase):
 
         conn.close()
 
-    def test_stock_history_update(self):
+    def test_download_historical_data(self):
+        symbol = 'BBAS3'
+        start_date = dt.datetime(2021, 1, 1)
+        end_date = dt.datetime(2021, 1, 10)
+        historical_data = stock_history.download_historical_data(symbol, stock_history.mt5.TIMEFRAME_D1, start_date, end_date)
+        self.assertIsNotNone(historical_data)
+        self.assertGreater(len(historical_data.index), 0)
+
+    def test_check_and_update_history(self):
         conn = sqlite3.connect('stable.db')
         cursor = conn.cursor()
 
@@ -40,8 +49,38 @@ class TestPortfolioManagementDatabase(unittest.TestCase):
         cursor.execute("SELECT COUNT(*) FROM stock_history")
         initial_row_count = cursor.fetchone()[0]
 
+        # Get the first stock from the stocks table
+        cursor.execute("SELECT asset_id, ticker FROM stocks LIMIT 1")
+        asset_id, ticker = cursor.fetchone()
+
+        # Check and update stock_history
+        stock_history.check_and_update_history(asset_id, ticker, cursor)
+
+        # Get the updated row count of stock_history table
+        cursor.execute("SELECT COUNT(*) FROM stock_history")
+        updated_row_count = cursor.fetchone()[0]
+
+        # Check if the table has been updated with new data
+        self.assertGreater(updated_row_count, initial_row_count)
+
+        conn.close()
+
+    def test_update_stock_history(self):
+        conn = sqlite3.connect('stable.db')
+        cursor = conn.cursor()
+
+        # Get the current row count of stock_history table
+        cursor.execute("SELECT COUNT(*) FROM stock_history")
+        initial_row_count = cursor.fetchone()[0]
+
+        # Get the first stock from the stocks table
+        cursor.execute("SELECT asset_id, ticker FROM stocks LIMIT 1")
+        asset_id, ticker = cursor.fetchone()
+
         # Update stock_history with a new date range
-        stock_history.update_stock_history('2022-12-17', '2022-12-31')
+        start_date = dt.datetime(2022, 12, 17)
+        end_date = dt.datetime(2022, 12, 31)
+        stock_history.update_stock_history(start_date, end_date, asset_id, ticker, cursor)
 
         # Get the updated row count of stock_history table
         cursor.execute("SELECT COUNT(*) FROM stock_history")
