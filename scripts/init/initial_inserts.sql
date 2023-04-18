@@ -3,41 +3,44 @@
 -- asset_types table
 INSERT INTO asset_types (id, name)
 VALUES
-  (1, 'Stock'),
-  (2, 'Bond');
+  (1, 'Cash'),
+  (2, 'Stock'),
+  (3, 'Bond');
 
 -- assets table
 INSERT INTO assets (id, name, type_id)
 VALUES
-  (1, 'Microsoft Corporation', 1),
-  (2, 'Exxon Mobil Corporation', 1),
-  (3, 'Johnson & Johnson', 1);
+  (1, 'Cash', 1),
+  (2, 'Banco do Brasil S.A.', 2),
+  (3, 'Petroleo Brasileiro S.A.', 2),
+  (4, 'Ambev S.A.', 2);
 
 -- stocks table
 INSERT INTO stocks (asset_id, ticker, exchange, sector, type, industry)
 VALUES
-  (1, 'MSFT', 'NASDAQ', 'Technology', 'Equity', 'Software'),
-  (2, 'XOM', 'NYSE', 'Energy', 'Equity', 'Oil & Gas'),
-  (3, 'JNJ', 'NYSE', 'Healthcare', 'Equity', 'Pharmaceuticals');
+  (2, 'BBAS3', 'B3', 'Financials', 'Equity', 'Banking'),
+  (3, 'PETR4', 'B3', 'Energy', 'Equity', 'Oil & Gas'),
+  (4, 'ABEV3', 'B3', 'Consumer Staples', 'Equity', 'Beverages');
 
 -- portfolios table
 INSERT INTO portfolios (id, name, date_created, description)
 VALUES
-  (1, 'Dummy Stock Portfolio', '2018-12-31', 'Equal weight portfolio of stocks');
+  (1, 'Dummy Stock Portfolio', '2018-12-28', 'Equal weight portfolio of stocks');
 
 -- portfolio transactions (initial buy)
  INSERT INTO portfolio_transactions (id, portfolio_id, asset_id, type, date, quantity, price, description)
  VALUES
-   (1, 1, 1, 'buy', '2018-12-31', 493, 101.50, 'Microsoft purchase'),
-   (2, 1, 2, 'buy', '2018-12-31', 731, 68.45, 'Exxon purchase'),
-   (3, 1, 3, 'buy', '2018-12-31', 389, 128.50, 'Johnson & Johnson purchase');
+   (1, 1, 1, 'buy', '2018-12-28', 170000, 1, 'Initial deposit'), 
+   (2, 1, 2, 'buy', '2018-12-28', 1440, 34.71, 'Banco do Brasil purchase'),
+   (3, 1, 3, 'buy', '2018-12-28', 4806, 10.41, 'Petrobras purchase'),
+   (4, 1, 4, 'buy', '2018-12-28', 3670, 13.62, 'Ambev purchase');
 
 -- -- rebalance
  INSERT INTO portfolio_transactions (id, portfolio_id, asset_id, type, date, quantity, price, description)
  VALUES
-   (4, 1, 1, 'sell', '2019-01-31', 8, 104.43, 'Microsoft rebalance'),
-   (5, 1, 2, 'buy', '2019-01-31', 18, 73.28, 'Exxon rebalance'),
-   (6, 1, 3, 'sell', '2019-01-31', 4, 133.08, 'Johnson & Johnson rebalance');
+   (5, 1, 2, 'buy', '2019-12-30', 81, 42.93, 'Banco do Brasil rebalance'),
+   (6, 1, 3, 'sell', '2019-12-30', 355, 14.67, 'Petrobras rebalance'),
+   (7, 1, 4, 'buy', '2019-12-30', 100, 17.32, 'Ambev rebalance');
 
 -- portfolio_assets (created from portfolio_transactions)
 INSERT INTO portfolio_assets (portfolio_id, asset_id, last_modified, asset_quantity)
