@@ -1,43 +1,55 @@
-import sqlite3
+import os
 import pandas as pd
-from pandas_datareader import data as pdr
+import sqlite3
+import datetime as dt
+import MetaTrader5 as mt5
+
+def download_historical_data(symbol, timeframe, start_date, end_date):
+    mt5_historical_data = mt5.copy_rates_range(symbol, timeframe, start_date, end_date)
+
+    historical_data = pd.DataFrame(mt5_historical_data)
+    historical_data.rename(columns={'time': 'date', 'tick_volume': 'volume'}, inplace=True)
+    historical_data['date'] = pd.to_datetime(historical_data['date'], unit='s')
+    historical_data.drop(columns=['spread', 'real_volume'], inplace=True)
+
+    return historical_data
 
 def update_stock_history(start_date, end_date):
-    # Connect to the database
-    conn = sqlite3.connect('stable.db')
-
-    # Create a cursor
+    conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), '..', '..', 'stable.db'))
     cursor = conn.cursor()
 
-    # Retrieve the list of assets from the stocks table
-    cursor.execute('SELECT asset_id, ticker, exchange FROM stocks')
-    assets = cursor.fetchall()
+    cursor.execute("SELECT asset_id, ticker FROM stocks")
+    stocks = cursor.fetchall()
 
-    # Iterate through the assets
-    for asset in assets:
-        asset_id, ticker, exchange = asset
+    if not mt5.initialize():
+        mt5.shutdown()
 
-        # Use pandas_datareader to retrieve the stock data from Yahoo Finance
-        stock_data = pdr.get_data_yahoo(ticker, start_date, end_date)
+    for stock in stocks:
+        asset_id, ticker = stock
+        available_assets = mt5.symbols_get(group='*' + ticker + '*')
 
-        # Iterate through the rows in the stock data DataFrame
+        if ticker in [available_assets[n].name for n in range(len(available_assets))]:
+            mt5.symbol_select(ticker, True)
+        else:
+            print(f'Invalid selected asset ({ticker}). Verify if it is available on the broker synchronized with MetaTrader5.')
+            continue
+
+        stock_data = download_historical_data(ticker, mt5.TIMEFRAME_D1, start_date, end_date)
+
         for index, row in stock_data.iterrows():
-            date = index.strftime('%Y-%m-%d')
-            open_price = row['Open']
-            high = row['High']
-            low = row['Low']
-            close = row['Close']
-            adjusted_close = row['Adj Close']
-            volume = row['Volume']
+            cursor.execute('''
+                INSERT OR IGNORE INTO stock_history (asset_id, date, open, high, low, close, adjusted_close, volume)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (asset_id, row['date'].date(), row['open'], row['high'], row['low'], row['close'], row['close'], row['volume']))
 
-            # Insert the stock data into the stock_history table
-            cursor.execute('INSERT INTO stock_history (asset_id, date, open, high, low, close, adjusted_close, volume) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (asset_id, date, open_price, high, low, close, adjusted_close, volume))
-
-    # Commit the changes to the database
     conn.commit()
-
-    # Close the connection
     conn.close()
+    mt5.shutdown()
 
-# Example usage: update the stock_history table with data from January 1, 2020 to December 31, 2020
-update_stock_history('2018-12-31', '2022-12-16')
+# Update stocks already in the database
+if __name__ == '__main__':
+    end_date = dt.datetime.now()
+    start_date = end_date - dt.timedelta(days=30)
+    update_stock_history(start_date, end_date)
+
+# Update stocks new to the database
