@@ -7,12 +7,16 @@ import MetaTrader5 as mt5
 def download_historical_data(symbol, timeframe, start_date, end_date):
     mt5_historical_data = mt5.copy_rates_range(symbol, timeframe, start_date, end_date)
 
+    if not mt5_historical_data:
+        return None
+
     historical_data = pd.DataFrame(mt5_historical_data)
     historical_data.rename(columns={'time': 'date', 'tick_volume': 'volume'}, inplace=True)
     historical_data['date'] = pd.to_datetime(historical_data['date'], unit='s')
     historical_data.drop(columns=['spread', 'real_volume'], inplace=True)
 
     return historical_data
+
 
 def update_stock_history(start_date, end_date, asset_id, ticker, cursor):
     available_assets = mt5.symbols_get(group='*' + ticker + '*')
@@ -25,11 +29,12 @@ def update_stock_history(start_date, end_date, asset_id, ticker, cursor):
 
     stock_data = download_historical_data(ticker, mt5.TIMEFRAME_D1, start_date, end_date)
 
-    for index, row in stock_data.iterrows():
-        cursor.execute('''
-            INSERT OR IGNORE INTO stock_history (asset_id, date, open, high, low, close, adjusted_close, volume)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (asset_id, row['date'].date(), row['open'], row['high'], row['low'], row['close'], row['close'], row['volume']))
+    if stock_data is not None:
+        for index, row in stock_data.iterrows():
+            cursor.execute('''
+                INSERT OR IGNORE INTO stock_history (asset_id, date, open, high, low, close, adjusted_close, volume)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (asset_id, row['date'].date(), row['open'], row['high'], row['low'], row['close'], row['close'], row['volume']))
 
 def check_and_update_history(asset_id, ticker, cursor):
     cursor.execute('SELECT MAX(date) FROM stock_history WHERE asset_id = ?', (asset_id,))
