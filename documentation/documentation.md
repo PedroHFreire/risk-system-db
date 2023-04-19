@@ -79,9 +79,11 @@ The stabledb database consists of several tables that store information about po
 | asset_id    | INTEGER   | Primary key, foreign key referencing `assets.id`.   |
 | ticker      | TEXT      | Unique stock ticker symbol.                         |
 | exchange    | TEXT      | The stock exchange the stock is traded on.          |
-| sector      | TEXT      | The sector the stock belongs to.                    |
 | type        | TEXT      | The type of stock (e.g., common, preferred).        |
-| industry    | TEXT      | The industry the stock belongs to.                  |
+| sector      | TEXT      | The sector the stock belongs to.                    |
+| subsector   | TEXT      | The subsector the stock ongs.                       |
+| segment     | TEXT      | The segment the stock belongs to.                   |
+
 
 ### 6. `stock_history` table
 

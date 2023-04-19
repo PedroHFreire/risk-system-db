@@ -33,9 +33,10 @@ last_modified (date of the last asset transaction)
 asset_id (primary key, foreign key to assets.id)
 ticker (unique)
 exchange
-sector
 type
-industry 
+sector
+subsector
+segment
     Table: stock_history
 asset_id (foreign key to assets.id)
 date (date the historical data was recorded)

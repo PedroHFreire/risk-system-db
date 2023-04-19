@@ -32,9 +32,10 @@ CREATE TABLE stocks (
   asset_id INTEGER PRIMARY KEY,
   ticker TEXT UNIQUE NOT NULL,
   exchange TEXT NOT NULL,
+  type TEXT,
   sector TEXT NOT NULL,
-  type TEXT NOT NULL,
-  industry TEXT NOT NULL,
+  subsector TEXT NOT NULL,
+  segment TEXT NOT NULL,
   FOREIGN KEY (asset_id) REFERENCES assets(id)
 );
 
