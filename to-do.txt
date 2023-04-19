@@ -10,16 +10,24 @@ excluir test_mt5 e precos.ipynb: ok
 Atualizar test_suite.py: ok
 
 ----
+documentation: 1
+Web app para interagir com base de dados: 2
+integrar com data source para renda fixa: 3
+python notebook com analise da carteira (futuro risk system): 4
 
 Documentation with knowledge base AI (use some tool to get all the chats about the database):
-  Fine tune the chats with what you have now: 1
-  Atualizar README e etc segundo chatgpt e pedir para ele criar um texto que resume nossa conversa até então para eu continuar o chat: 2
+  Fine tune the chats with what you have now:
+  Atualizar README e etc segundo chatgpt e pedir para ele criar um texto que resume nossa conversa até então para eu continuar o chat:
   Create full documentation of the database: 3
   Create a step by step tutorial on how to create and use the database with use cases: 11
 
-3. Upgrades
+Auto gpt: 
+  read the readme and documentation, take note of the directory tree and read every file and create a summary of the project
+
+Upgrades
   Integrar com sistema cei da b3: 4
   Integrar com data source para renda fixa: 7
+  Integrar com data source de derivativos: 11
   Integrar com data source para fundos: 10
 
 Montar interface web para interagir com a base de dados (outro projeto que vai integrar stabledb e stablepy)
