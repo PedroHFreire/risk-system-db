@@ -1,8 +1,31 @@
-stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id 
-PK de stock_history deveria ser asset_id + date, pois assim não teria duas linhas pro mesmo ativo no mesmo dia, mesma coisa vale para bond_history 
-usar de exemplo ativos da bolsa brasileira 
+stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id: ok (nao vai ter stock_id ja que os stocks tem id unico na tabela assets)
+usar de exemplo ativos da bolsa brasileira: ok
 Create a python script to update stock_history: ok 
 Update the schema: ok 
 Organize the git repo: ok 
-Create documentation with how to create the db 
+atualizar preços e quantidades de portfolio_transactions no initial_inserts.sql: ok
+atualizar first_stocks.py e data usando metatrader 5 e exemplos brasileiros: ok
+checar stock_history (fez no chatgpt so pegar no historico da conversa): ok
+excluir test_mt5 e precos.ipynb: ok
+Atualizar test_suite.py: ok
 
+----
+
+Documentation with knowledge base AI (use some tool to get all the chats about the database):
+  Fine tune the chats with what you have now: 1
+  Atualizar README e etc segundo chatgpt e pedir para ele criar um texto que resume nossa conversa até então para eu continuar o chat: 2
+  Create full documentation of the database: 3
+  Create a step by step tutorial on how to create and use the database with use cases: 11
+
+3. Upgrades
+  Integrar com sistema cei da b3: 4
+  Integrar com data source para renda fixa: 7
+  Integrar com data source para fundos: 10
+
+Montar interface web para interagir com a base de dados (outro projeto que vai integrar stabledb e stablepy)
+  pagina para cadastro de acoes, carteiras etc: 5
+  pagina para visualizar carteira e seu historico: 6
+  usar print do lavradio que ta salvo na galeria do bloco de notas do wpp como base: 8
+
+Rever step-by-step inicial, criar logging?: 9
+Nessa base de dados close e adjusted_close sao a mesma coisa, tem que corrigir isso
