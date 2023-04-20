@@ -8,32 +8,35 @@ atualizar first_stocks.py e data usando metatrader 5 e exemplos brasileiros: ok
 checar stock_history (fez no chatgpt so pegar no historico da conversa): ok
 excluir test_mt5 e precos.ipynb: ok
 Atualizar test_suite.py: ok
+documentation: ok
+Web app para interagir com base de dados: ok
 
 ----
-documentation: 1
-Web app para interagir com base de dados: 2
-integrar com data source para renda fixa: 3
-python notebook com analise da carteira (futuro risk system): 4
+excluir clean_db: ok
+olhar queries
+integrar com data source para indices: 1
+python notebook com analise da carteira (futuro risk system): 2
+autogpt with gpt4all to automatically update documentation and readme: 5
 
 Documentation with knowledge base AI (use some tool to get all the chats about the database):
   Fine tune the chats with what you have now:
   Atualizar README e etc segundo chatgpt e pedir para ele criar um texto que resume nossa conversa até então para eu continuar o chat:
-  Create full documentation of the database: 3
-  Create a step by step tutorial on how to create and use the database with use cases: 11
+  Create full documentation of the database:
+  Create a step by step tutorial on how to create and use the database with use cases:
 
 Auto gpt: 
   read the readme and documentation, take note of the directory tree and read every file and create a summary of the project
 
 Upgrades
-  Integrar com sistema cei da b3: 4
-  Integrar com data source para renda fixa: 7
-  Integrar com data source de derivativos: 11
-  Integrar com data source para fundos: 10
+  Integrar com sistema cei da b3:
+  Integrar com data source para renda fixa:
+  Integrar com data source para fundos:
+  Integrar com data source de derivativos:
+  
+Adicionar nome das empresas de acordo com a planilha setorial da b3
+criar tabela de type stocks: equity, bdr, etf...
+criar tabela de setores, subsetores e segmentos de acordo com planilha setorial e colocar como constraint no registro
 
-Montar interface web para interagir com a base de dados (outro projeto que vai integrar stabledb e stablepy)
-  pagina para cadastro de acoes, carteiras etc: 5
-  pagina para visualizar carteira e seu historico: 6
-  usar print do lavradio que ta salvo na galeria do bloco de notas do wpp como base: 8
-
-Rever step-by-step inicial, criar logging?: 9
+Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
+Rever step-by-step inicial, criar logging?:
 Nessa base de dados close e adjusted_close sao a mesma coisa, tem que corrigir isso
