@@ -7,7 +7,7 @@ import MetaTrader5 as mt5
 def download_historical_data(symbol, timeframe, start_date, end_date):
     mt5_historical_data = mt5.copy_rates_range(symbol, timeframe, start_date, end_date)
 
-    if not mt5_historical_data:
+    if mt5_historical_data.size == 0:
         return None
 
     historical_data = pd.DataFrame(mt5_historical_data)
@@ -16,7 +16,6 @@ def download_historical_data(symbol, timeframe, start_date, end_date):
     historical_data.drop(columns=['spread', 'real_volume'], inplace=True)
 
     return historical_data
-
 
 def update_stock_history(start_date, end_date, asset_id, ticker, cursor):
     available_assets = mt5.symbols_get(group='*' + ticker + '*')
