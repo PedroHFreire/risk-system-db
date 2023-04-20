@@ -41,7 +41,7 @@ CREATE TABLE stocks (
 
 CREATE TABLE stock_history (
     asset_id INTEGER NOT NULL,
-    date TEXT NOT NULL,
+    date DATE NOT NULL,
     open REAL,
     high REAL,
     low REAL,
@@ -63,7 +63,7 @@ CREATE TABLE bonds (
 
 CREATE TABLE bond_history (
     asset_id INTEGER NOT NULL,
-    date TEXT NOT NULL,
+    date DATE NOT NULL,
     coupon REAL,
     maturity TEXT,
     yield REAL,

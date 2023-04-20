@@ -16,7 +16,7 @@ class TestPortfolioManagementDatabase(unittest.TestCase):
 
         expected_columns = [
             ('asset_id', 'INTEGER'),
-            ('date', 'TEXT'),
+            ('date', 'DATE'),
             ('open', 'REAL'),
             ('high', 'REAL'),
             ('low', 'REAL'),
