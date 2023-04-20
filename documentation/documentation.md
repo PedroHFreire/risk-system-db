@@ -34,7 +34,22 @@ Please ensure that all the required software components are installed and config
 
 ## Database Schema
 
-The stabledb database consists of several tables that store information about portfolios, assets, asset types, portfolio assets, stocks, bonds, portfolio transactions, portfolio fees, portfolio goals, and market indices. The following section describes each table and its columns.
+The stabledb database consists of several tables that store information about portfolios, assets, asset types, portfolio assets, stocks, bonds, portfolio transactions, portfolio fees, portfolio goals, and market indices. 
+
+It includes tables for storing information about portfolios, assets, 
+asset types, portfolio assets, stocks, bonds, portfolio transactions, 
+portfolio fees, portfolio goals, and market indices. The stock_history 
+and bond_history tables include columns for storing historical data for 
+stocks and bonds, and the portfolio_transactions table allows you to store 
+information about the buy and sell transactions that occur in each portfolio. 
+The portfolio_fees table allows you to store information about the fees and 
+expenses associated with each portfolio, and the portfolio_goals table 
+allows you to store information about the financial goals and constraints 
+for each portfolio. The market_indices table allows you to store information  
+about the market indices that you want to use as benchmarks for your 
+portfolio performance.
+
+The following section describes each table and its columns.
 
 ![ERD](./stabledb_ERD.png)
 
