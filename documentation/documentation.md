@@ -74,7 +74,7 @@ The following section describes each table and its columns.
 |--------------|-----------|------------------------------------|
 | id           | INTEGER   | Unique identifier for each portfolio. |
 | name         | TEXT      | The name of the portfolio.         |
-| date_created | TEXT      | The date the portfolio was created or modified (YYYY-MM-DD). |
+| date_created | DATE      | The date the portfolio was created or modified (YYYY-MM-DD). |
 | description  | TEXT      | Optional description of the portfolio. |
 
 ### 4. `portfolio_assets` table
@@ -85,7 +85,7 @@ The following section describes each table and its columns.
 | portfolio_id   | INTEGER   | Foreign key referencing the portfolio in `portfolios`.     |
 | asset_id       | INTEGER   | Foreign key referencing the asset in `assets`.             |
 | asset_quantity | REAL      | The quantity of the asset in the portfolio.                |
-| last_modified  | TEXT      | The date of the last asset transaction (YYYY-MM-DD).       |
+| last_modified  | DATE      | The date of the last asset transaction (YYYY-MM-DD).       |
 
 ### 5. `stocks` table
 
@@ -143,7 +143,7 @@ The following section describes each table and its columns.
 | portfolio_id | INTEGER   | Foreign key referencing the portfolio in `portfolios`.|
 | asset_id     | INTEGER   | Foreign key referencing the asset in `assets`.       |
 | type         | TEXT      | The transaction type (either "buy" or "sell").       |
-| date         | TEXT      | The date of the transaction (YYYY-MM-DD).            |
+| date         | DATE      | The date of the transaction (YYYY-MM-DD).            |
 | quantity     | REAL      | The quantity of the asset involved in the transaction.|
 | price        | REAL      | The price of the asset at the time of the transaction.|
 | description  | TEXT      | Optional description of the transaction.             |
@@ -156,7 +156,7 @@ The following section describes each table and its columns.
 | portfolio_id| INTEGER   | Foreign key referencing the portfolio in `portfolios`. |
 | fee_type    | TEXT      | The type of fee (e.g., management fee, transaction fee).|
 | fee_amount  | REAL      | The amount of the fee.                                 |
-| fee_date    | TEXT      | The date the fee was charged (YYYY-MM-DD).             |
+| fee_date    | DATE      | The date the fee was charged (YYYY-MM-DD).             |
 
 ### 11. `portfolio_goals` table
 
