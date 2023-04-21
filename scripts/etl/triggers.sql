@@ -17,3 +17,5 @@ BEGIN
       AND portfolio_assets.asset_id = new.asset_id
   );
 END;
+
+-- TODO: A trigger that updates the cash balance with each buy or sell

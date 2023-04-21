@@ -27,7 +27,7 @@ INSERT INTO portfolios (id, name, date_created, description)
 VALUES
   (1, 'Dummy Stock Portfolio', '2018-12-28', 'Equal weight portfolio of stocks');
 
--- portfolio transactions (initial buy)
+-- portfolio transactions (initial buy) -- TO DO: add cash balance transactions
  INSERT INTO portfolio_transactions (id, portfolio_id, asset_id, type, date, quantity, price, description)
  VALUES
    (1, 1, 1, 'buy', '2018-12-28', 170000, 1, 'Initial deposit'), 
@@ -35,12 +35,12 @@ VALUES
    (3, 1, 3, 'buy', '2018-12-28', 4806, 10.41, 'Petrobras purchase'),
    (4, 1, 4, 'buy', '2018-12-28', 3670, 13.62, 'Ambev purchase');
 
--- -- rebalance
+-- rebalance 
  INSERT INTO portfolio_transactions (id, portfolio_id, asset_id, type, date, quantity, price, description)
  VALUES
    (5, 1, 2, 'buy', '2019-12-30', 81, 42.93, 'Banco do Brasil rebalance'),
    (6, 1, 3, 'sell', '2019-12-30', 355, 14.67, 'Petrobras rebalance'),
-   (7, 1, 4, 'buy', '2019-12-30', 100, 17.32, 'Ambev rebalance');
+   (7, 1, 4, 'buy', '2019-12-30', 100, 17.32, 'Ambev rebalance'); 
 
 -- portfolio_assets (created from portfolio_transactions)
 INSERT INTO portfolio_assets (portfolio_id, asset_id, last_modified, asset_quantity)

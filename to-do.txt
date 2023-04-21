@@ -10,15 +10,36 @@ excluir test_mt5 e precos.ipynb: ok
 Atualizar test_suite.py: ok
 documentation: ok
 Web app para interagir com base de dados: ok
+excluir clean_db: ok
+olhar queries: ok
+date type bug on stock and bond history: ok
+script com analise da carteira (futuro risk system): ok
 
 ----
-excluir clean_db: ok
-olhar queries
+Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
+Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions)
 integrar com data source para indices: 1
-python notebook com analise da carteira (futuro risk system): 2
-autogpt with gpt4all to automatically update documentation and readme: 5
 
+Analysis (criar essas analises para colocar na pasta de analysis e depois usar no web app e stablepy):
+  Portfolio Overview: Display a summary of the user's portfolios, including the total value, allocation by asset type (stocks, bonds, etc.), and performance (return, risk).: 
+  Asset Allocation: Create a pie chart or a treemap to visualize the distribution of assets in a portfolio by sector, subsector, or segment.: 
+
+  Stock Performance: Generate a line chart to show the historical performance of individual stocks or the entire portfolio over a specified period.
+  Market Index Performance: Compare the performance of the user's portfolios against various market indices using a line chart or a bar chart.
+  
+  Portfolio Transactions: Display a table or a timeline of the portfolio's transactions (buys and sells), including the date, asset, quantity, and price.
+  
+  Correlation Matrix: Generate a heatmap to visualize the correlation between the assets in the portfolio, which can help identify diversification opportunities.
+  Risk-Return Scatterplot: Create a scatterplot to display the risk-return profile of each asset in the portfolio, with the x-axis representing risk (e.g., standard deviation) and the y-axis representing return (e.g., average annual return).
+
+  Bond Performance: Create a line chart to visualize the historical yield, spread, and credit rating of bonds in the portfolio.
+  Portfolio Fees: Create a bar chart or a table to show the total fees paid for each portfolio, broken down by fee type (management fee, transaction fee, etc.).
+  Portfolio Goals: Visualize the progress towards the portfolio goals using progress bars, line charts, or other suitable visualizations.
+  
+
+-------
 Documentation with knowledge base AI (use some tool to get all the chats about the database):
+  autogpt with gpt4all to automatically update documentation and readme: 5
   Fine tune the chats with what you have now:
   Atualizar README e etc segundo chatgpt e pedir para ele criar um texto que resume nossa conversa até então para eu continuar o chat:
   Create full documentation of the database:
@@ -37,6 +58,5 @@ Adicionar nome das empresas de acordo com a planilha setorial da b3
 criar tabela de type stocks: equity, bdr, etf...
 criar tabela de setores, subsetores e segmentos de acordo com planilha setorial e colocar como constraint no registro
 
-Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
 Rever step-by-step inicial, criar logging?:
 Nessa base de dados close e adjusted_close sao a mesma coisa, tem que corrigir isso
