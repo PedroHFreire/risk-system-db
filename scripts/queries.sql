@@ -61,6 +61,7 @@ GROUP BY a.type_id, at.name;
 */
 
 -- Portfolio value over time
+/*
 WITH asset_prices AS (
     SELECT asset_id, date, close AS price
     FROM stock_history
@@ -87,3 +88,30 @@ portfolio_value AS (
 SELECT *
 FROM portfolio_value
 ORDER BY date;
+*/
+
+-- Sector/subsector/segment composition
+/*
+WITH asset_prices AS (
+    SELECT sh.asset_id, sh.close AS price
+    FROM stock_history sh
+    WHERE sh.date = (
+        SELECT MAX(date)
+        FROM stock_history
+        WHERE asset_id = sh.asset_id AND date <= '2022-04-14'
+    )
+)
+SELECT
+    s.sector,
+    s.subsector,
+    s.segment,
+    a.name as stock,
+    SUM(pa.asset_quantity * ap.price) as total_value
+FROM portfolio_assets pa
+JOIN assets a ON pa.asset_id = a.id
+JOIN asset_types at ON a.type_id = at.id
+JOIN stocks s ON a.id = s.asset_id
+JOIN asset_prices ap ON a.id = ap.asset_id
+WHERE pa.portfolio_id = 1 AND at.name = 'Stock'
+GROUP BY s.sector, s.subsector, s.segment, a.name;
+*/
