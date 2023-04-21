@@ -14,14 +14,16 @@ excluir clean_db: ok
 olhar queries: ok
 date type bug on stock and bond history: ok
 script com analise da carteira (futuro risk system): ok
+Portfolio Overview: Display a summary of the user's portfolios, including the total value, allocation by asset type (stocks, bonds, etc.), and performance (return, risk).: ok mas faltou performance e seria interessante uma tabela com a composição atual 
 
 ----
+mudar nome da pasta para stabledb
 Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
 Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions)
 integrar com data source para indices: 1
 
 Analysis (criar essas analises para colocar na pasta de analysis e depois usar no web app e stablepy):
-  Portfolio Overview: Display a summary of the user's portfolios, including the total value, allocation by asset type (stocks, bonds, etc.), and performance (return, risk).: 
+  
   Asset Allocation: Create a pie chart or a treemap to visualize the distribution of assets in a portfolio by sector, subsector, or segment.: 
 
   Stock Performance: Generate a line chart to show the historical performance of individual stocks or the entire portfolio over a specified period.
@@ -35,7 +37,14 @@ Analysis (criar essas analises para colocar na pasta de analysis e depois usar n
   Bond Performance: Create a line chart to visualize the historical yield, spread, and credit rating of bonds in the portfolio.
   Portfolio Fees: Create a bar chart or a table to show the total fees paid for each portfolio, broken down by fee type (management fee, transaction fee, etc.).
   Portfolio Goals: Visualize the progress towards the portfolio goals using progress bars, line charts, or other suitable visualizations.
-  
+
+incluir visualização de preços e retornos
+Montar interface web para interagir com a base de dados (outro projeto que vai integrar stabledb e stablepy)
+  pagina para cadastro de acoes, carteiras etc: 5
+  pagina para visualizar carteira e seu historico: 6
+  usar print do lavradio que ta salvo na galeria do bloco de notas do wpp como base: 8
+
+Usar dash para ver os reports gerados por analysis? https://dash.plot.ly/installation
 
 -------
 Documentation with knowledge base AI (use some tool to get all the chats about the database):
