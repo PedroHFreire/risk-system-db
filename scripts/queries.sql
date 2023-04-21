@@ -58,4 +58,32 @@ JOIN asset_types at ON a.type_id = at.id
 JOIN asset_prices ap ON a.id = ap.asset_id
 WHERE pa.portfolio_id = 1
 GROUP BY a.type_id, at.name;
-/*
+*/
+
+-- Portfolio value over time
+WITH asset_prices AS (
+    SELECT asset_id, date, close AS price
+    FROM stock_history
+    WHERE asset_id IN (
+        SELECT asset_id
+        FROM portfolio_assets
+        WHERE portfolio_id = 1
+    )
+    UNION ALL
+    SELECT a.id as asset_id, sh.date, 1 AS price
+    FROM assets a
+    JOIN stock_history sh ON 1=1
+    WHERE a.type_id = (SELECT id FROM asset_types WHERE name = 'Cash')
+),
+portfolio_value AS (
+    SELECT
+        ap.date,
+        SUM(pa.asset_quantity * ap.price) AS value
+    FROM portfolio_assets pa
+    JOIN asset_prices ap ON pa.asset_id = ap.asset_id
+    WHERE pa.portfolio_id = 1
+    GROUP BY ap.date
+)
+SELECT *
+FROM portfolio_value
+ORDER BY date;
