@@ -1,29 +1,18 @@
 stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id: ok (nao vai ter stock_id ja que os stocks tem id unico na tabela assets)
-usar de exemplo ativos da bolsa brasileira: ok
-Create a python script to update stock_history: ok 
-Update the schema: ok 
-Organize the git repo: ok 
-atualizar preços e quantidades de portfolio_transactions no initial_inserts.sql: ok
-atualizar first_stocks.py e data usando metatrader 5 e exemplos brasileiros: ok
-checar stock_history (fez no chatgpt so pegar no historico da conversa): ok
-excluir test_mt5 e precos.ipynb: ok
-Atualizar test_suite.py: ok
-documentation: ok
-Web app para interagir com base de dados: ok
-excluir clean_db: ok
-olhar queries: ok
-date type bug on stock and bond history: ok
-script com analise da carteira (futuro risk system): ok
 Portfolio Overview: Display a summary of the user's portfolios, including the total value, allocation by asset type (stocks, bonds, etc.), and performance (return, risk).: ok mas faltou performance e seria interessante uma tabela com a composição atual 
+Integrate with openbb
 
 ----
-mudar nome da pasta para stabledb
-Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
-Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions)
-integrar com data source para indices: 1
+Bugs and improvements:
+  mudar nome da pasta para stabledb
+  Use last two messages at chatgpt "stabledb bugs" chat to insert the update_portfolio_assets function into the stock_history script and add a cashflow management feature into the database (Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions))
+  "There's a problem related to the cashflow management feature into the database (Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger?) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions))"
+
+The developers, who speak english and brazilian protuguese made this comment, however since "Cash" is an asset at the "assets" table it should also be updated in the "portfolio_assets" table with the update_portfolio_assets function, right?
+  Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
+  integrar com data source para indices: openbb
 
 Analysis (criar essas analises para colocar na pasta de analysis e depois usar no web app e stablepy):
-  
   Asset Allocation: Create a pie chart or a treemap to visualize the distribution of assets in a portfolio by sector, subsector, or segment.: 
 
   Stock Performance: Generate a line chart to show the historical performance of individual stocks or the entire portfolio over a specified period.
@@ -40,9 +29,9 @@ Analysis (criar essas analises para colocar na pasta de analysis e depois usar n
 
 incluir visualização de preços e retornos
 Montar interface web para interagir com a base de dados (outro projeto que vai integrar stabledb e stablepy)
-  pagina para cadastro de acoes, carteiras etc: 5
-  pagina para visualizar carteira e seu historico: 6
-  usar print do lavradio que ta salvo na galeria do bloco de notas do wpp como base: 8
+  pagina para cadastro de acoes, carteiras etc:
+  pagina para visualizar carteira e seu historico:
+  usar print do lavradio que ta salvo na galeria do bloco de notas do wpp como base:
 
 Usar dash para ver os reports gerados por analysis? https://dash.plot.ly/installation
 
