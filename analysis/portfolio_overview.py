@@ -39,6 +39,8 @@ ORDER BY date;
 """
 portfolio_value_df = pd.read_sql_query(portfolio_value_query, conn)
 
+print(portfolio_value_df)
+
 ## Fetch the asset allocation data
 asset_allocation_query = """
 WITH asset_prices AS (
@@ -64,6 +66,8 @@ WHERE pa.portfolio_id = 1
 GROUP BY a.type_id, at.name;
 """
 asset_allocation_df = pd.read_sql_query(asset_allocation_query, conn)
+
+print(asset_allocation_df)
 
 ## Fetch the stock composition data
 stock_composition_query = """
@@ -91,6 +95,8 @@ WHERE pa.portfolio_id = 1 AND at.name = 'Stock'
 GROUP BY s.sector, s.subsector, s.segment, a.name;
 """
 stock_composition_df = pd.read_sql_query(stock_composition_query, conn)
+
+print(stock_composition_df)
 
 # Plot charts
 ## Create plots
