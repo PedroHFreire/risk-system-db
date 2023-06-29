@@ -1,4 +1,3 @@
-stocks.stock_id deve ser renomeado para stocks.asset_id pq stock_id é na verdade asset_id: ok (nao vai ter stock_id ja que os stocks tem id unico na tabela assets)
 Portfolio Overview: Display a summary of the user's portfolios, including the total value, allocation by asset type (stocks, bonds, etc.), and performance (return, risk).: ok mas faltou performance e seria interessante uma tabela com a composição atual 
 Integrate with openbb
 
