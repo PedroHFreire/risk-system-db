@@ -1,59 +1,64 @@
-Portfolio Overview: Display a summary of the user's portfolios, including the total value, allocation by asset type (stocks, bonds, etc.), and performance (return, risk).: ok mas faltou performance e seria interessante uma tabela com a composição atual 
-Integrate with openbb
+# Intro
+Remember to use the TODO list to *discuss* the issues, tasks, sub-tasks, bug reports and feature requests descriptions with ChatGPT and them use these descriptions in Github.
 
-----
-Bugs and improvements:
-  mudar nome da pasta para stabledb
-  Use last two messages at chatgpt "stabledb bugs" chat to insert the update_portfolio_assets function into the stock_history script and add a cashflow management feature into the database (Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions))
-  "There's a problem related to the cashflow management feature into the database (Tem um bug no cash do portfolio, toda vez que tem um buy ou sell o dinheiro deveria vir de cash, tem que criar esse sistema de cash balance (usando trigger?) e atualizar a base atual nos initial inserts (so refazer a portfolio_transactions))"
+## TODO
+0. Add the update_portfolio_assets function into the stock_history.py script (feature discussed in 'stable db issue solving' chat)
+1. Create cashflow issue as specified in the chat 'stabledb issues'
+2. Create the other issues at bug fixes using chatgpt to build the issue
+3. Create a feature request for fixed income data source
+4. Create a feature request to implement fixed income into the database (need fixed income pricing etc)
+5. Create a feature request for indices data source
 
-The developers, who speak english and brazilian protuguese made this comment, however since "Cash" is an asset at the "assets" table it should also be updated in the "portfolio_assets" table with the update_portfolio_assets function, right?
-  Should everytime an product is added to stocks table (or bonds etc), he also be added to assets? Atualmente nao funciona pq tem stocks registrados com asset_id que nao estao em assets, o que deveria ser impossivel
-  integrar com data source para indices: openbb
+## Tasks:
 
-Analysis (criar essas analises para colocar na pasta de analysis e depois usar no web app e stablepy):
-  Asset Allocation: Create a pie chart or a treemap to visualize the distribution of assets in a portfolio by sector, subsector, or segment.: 
+### Features to Implement:
+- Portfolio Overview: Display a summary of the user's portfolios, which includes the total value, allocation by asset type (stocks, bonds, etc.). **Incomplete**: Lacks risk metric (maxDD) and a table with the current assets.
+- Integrate it's analysis and functions with the OpenBB platform.
+- Data Sources Integration:
+    - Integrate with a data source for indices (OpenBB).
+    - Integrate with B3's `cei` system (Get your real portfolio and transactions).
+    - Integrate with a data source for fixed income (Tesouro direto, Anbima).
+    - Integrate with a data source for funds (CVM).
+    - Integrate with a data source for derivatives.
 
-  Stock Performance: Generate a line chart to show the historical performance of individual stocks or the entire portfolio over a specified period.
-  Market Index Performance: Compare the performance of the user's portfolios against various market indices using a line chart or a bar chart.
-  
-  Portfolio Transactions: Display a table or a timeline of the portfolio's transactions (buys and sells), including the date, asset, quantity, and price.
-  
-  Correlation Matrix: Generate a heatmap to visualize the correlation between the assets in the portfolio, which can help identify diversification opportunities.
-  Risk-Return Scatterplot: Create a scatterplot to display the risk-return profile of each asset in the portfolio, with the x-axis representing risk (e.g., standard deviation) and the y-axis representing return (e.g., average annual return).
+### Bug Fixes:
+- Rename the folder to `stabledb`.
+- Cashflow Management:
+    - Use the last two messages at the `chatgpt "stabledb bugs"` chat to insert the `update_portfolio_assets` function into the `stock_history` script.
+    - Implement a cashflow management feature into the database to handle portfolio cash properly.
+    - Create a cash balance system (potentially using a trigger to automatically insert the cash transactions related to the buy and sell of assets) and update the existing database according to initial inserts.
+    - As "Cash" is an asset in the `assets` table, it should also be updated in the `portfolio_assets` table with the `update_portfolio_assets` function.
+- When a product is added to the stocks table (or bonds etc), should it also be added to assets? Right now, there are stocks registered with `asset_id` that are not in `assets`, which should not be possible.
 
-  Bond Performance: Create a line chart to visualize the historical yield, spread, and credit rating of bonds in the portfolio.
-  Portfolio Fees: Create a bar chart or a table to show the total fees paid for each portfolio, broken down by fee type (management fee, transaction fee, etc.).
-  Portfolio Goals: Visualize the progress towards the portfolio goals using progress bars, line charts, or other suitable visualizations.
+### Data Analysis (should be another project folder that uses stablepy and stabledb):
+Description: This should be done first with simple visuals in a static that can then be upgraded to an interactive plotting system
 
-incluir visualização de preços e retornos
-Montar interface web para interagir com a base de dados (outro projeto que vai integrar stabledb e stablepy)
-  pagina para cadastro de acoes, carteiras etc:
-  pagina para visualizar carteira e seu historico:
-  usar print do lavradio que ta salvo na galeria do bloco de notas do wpp como base:
+- Asset Allocation: Create a pie chart or a treemap to visualize the distribution of assets in a portfolio by sector, subsector, or segment.
+- Stock Performance: Generate a line chart to show the historical performance of individual stocks or the entire portfolio over a specified period.
+- Market Index Performance: Compare the performance of the user's portfolios against various market indices using a line chart or a bar chart.
+- Portfolio Transactions: Display a table or a timeline of the portfolio's transactions (buys and sells), including the date, asset, quantity, and price.
+- Correlation Matrix: Generate a heatmap to visualize the correlation between the assets in the portfolio, which can help identify diversification opportunities.
+- Risk-Return Scatterplot: Create a scatterplot to display the risk-return profile of each asset in the portfolio.
+- Bond Performance: Create a line chart to visualize the historical yield, spread, and credit rating of bonds in the portfolio.
+- Portfolio Fees: Create a bar chart or a table to show the total fees paid for each portfolio, broken down by fee type (management fee, transaction fee, etc.).
+- Portfolio Goals: Visualize the progress towards the portfolio goals using progress bars, line charts, or other visualizations.
+- Include price and return visualizations.
 
-Usar dash para ver os reports gerados por analysis? https://dash.plot.ly/installation
+### GUI for Data Insertion:
+- Develop a web interface to interact with the database.
+- Create pages for registering stocks, portfolios, etc.
+- Create a page for viewing portfolio and its history (using the reports from the Data Analysis project).
 
--------
-Documentation with knowledge base AI (use some tool to get all the chats about the database):
-  autogpt with gpt4all to automatically update documentation and readme: 5
-  Fine tune the chats with what you have now:
-  Atualizar README e etc segundo chatgpt e pedir para ele criar um texto que resume nossa conversa até então para eu continuar o chat:
-  Create full documentation of the database:
-  Create a step by step tutorial on how to create and use the database with use cases:
+### Documentation:
+- Update README and other documentation using all chats history in ChatGPT that you had about the database.
+- Use GPT4ALL and autogpt to automatically update documentation and README.
+  - Create comprehensive documentation of the database.
+  - Create a step-by-step tutorial on how to create and use the database with use cases.
+  - Use AutoGPT to read the readme, documentation, take note of the directory tree, read every file including GPT chats about stabledb, and create a project summary.
 
-Auto gpt: 
-  read the readme and documentation, take note of the directory tree and read every file and create a summary of the project
-
-Upgrades
-  Integrar com sistema cei da b3:
-  Integrar com data source para renda fixa:
-  Integrar com data source para fundos:
-  Integrar com data source de derivativos:
-  
-Adicionar nome das empresas de acordo com a planilha setorial da b3
-criar tabela de type stocks: equity, bdr, etf...
-criar tabela de setores, subsetores e segmentos de acordo com planilha setorial e colocar como constraint no registro
-
-Rever step-by-step inicial, criar logging?:
-Nessa base de dados close e adjusted_close sao a mesma coisa, tem que corrigir isso
+### Upgrades:
+- Add company names according to B3's sectorial spreadsheet.
+- Create a `type stocks` table: equity, BDR, ETF, etc.
+- Create a table for sectors, subsectors, and segments according to the sectorial spreadsheet and use it as a constraint for registering stocks.
+- Review initial step-by-step instructions (in chat history?), and possibly add logging functionality.
+- Fix the issue where `close` and `adjusted_close` are currently the same in the database.
